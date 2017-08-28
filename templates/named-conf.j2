@@ -1,0 +1,10 @@
+zone "{{ my_domain }}.com" { 
+    type master; 
+    file "/etc/bind/db.{{ my_domain }}.com";
+    forwarders{};
+}; 
+zone "{{ inverse_ip_domain }}.in-addr.arpa" { 
+    type master;  
+    file "/etc/bind/db.{{ my_domain }}.com.inv";
+    forwarders{}; 
+};
