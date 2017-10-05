@@ -1,10 +1,19 @@
 zone "{{ my_domain }}.com" { 
-    type master; 
+    # it indicates it's the principal server for handling resolving domaine names to IP address related to this domaine
+    type master;
+    # the file that contains the correspondance between the names in this domain and corresponded IP address
     file "/etc/bind/db.{{ my_domain }}.com";
+    # if there is not the needed mappings in the local DNS server, just go to other DNS servers to find your mapping 
     forwarders{};
-}; 
+};
+
+# if you want to create a DNS server that will resolve an IP address besides a domain(the inverse of a DNS server, both the DNS server and the inverse DNS existe in your machine)
+    # you should specify the Net_ID (le réseau) that we will solve the Ip address that exist in it 
 zone "{{ inverse_ip_domain }}.in-addr.arpa" { 
-    type master;  
+    # it indicates it's the principal server for handling the correspondance between the IP address and the domain names in this domaine
+    type master;
+    # the file that contains the correspondance between   
     file "/etc/bind/db.{{ my_domain }}.com.inv";
+    # same thing in the DNS server
     forwarders{}; 
 };
